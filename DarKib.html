@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Translation App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f6f6f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 400px;
+      text-align: center;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      resize: none;
+    }
+    select, button {
+      margin-top: 15px;
+      padding: 10px;
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .output {
+      margin-top: 20px;
+      background-color: #f0f0f0;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Translation App</h2>
+    <form action="/translate" method="post">
+      <label for="input_text"><strong>Input Text:</strong></label><br>
+      <textarea id="input_text" name="input_text">{{ input_text or '' }}</textarea><br>
+
+      <label for="direction"><strong>Select Direction:</strong></label><br>
+      <select id="direction" name="direction">
+        <option value="en_to_uk" {% if direction == 'en_to_uk' %}selected{% endif %}>
+          English to Ukrainian
+        </option>
+        <option value="uk_to_en" {% if direction == 'uk_to_en' %}selected{% endif %}>
+          Ukrainian to English
+        </option>
+      </select><br>
+
+      <button type="submit">Translate</button>
+    </form>
+
+    {% if output_text %}
+      <div class="output">
+        <strong>Translated Text:</strong>
+        <p>{{ output_text }}</p>
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
